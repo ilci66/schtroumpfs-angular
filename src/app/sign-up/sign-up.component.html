@@ -1,0 +1,53 @@
+<h1 class="sign-up-title">S'inscrire</h1>
+<form [formGroup]="signUpForm" action="" class='sign-up-form' (ngSubmit)="onSubmit()">
+  <div class="sign-up-form__err-box"></div>
+  <label class="sign-up-form__label" htmlFor="nom">Nom</label>
+  <input 
+    class="sign-up-form__input" 
+    required 
+    type="text" 
+    id='nom' 
+    name='nom' 
+    formControlName="nom"
+  />
+
+  <label class="sign-up-form__label" htmlFor="password">Mot de Passe</label>
+  <input 
+  class="sign-up-form__input" 
+    required 
+    type="password" 
+    id='motDePasse'
+    name='motDePasse'
+    formControlName="motDePasse"
+  />
+
+  <label class="sign-up-form__label" htmlFor="password2">Réécrivez le Mot de Passe</label>
+  <input 
+    class="sign-up-form__input" 
+    required 
+    type="password" 
+    id='reMotDePasse' 
+    name='reMotDePasse'
+    formControlName="reMotDePasse" 
+  />
+
+  <label class="sign-up-form__label" htmlFor="select_role">Rôle</label>
+  <select 
+    class="sign-up-form__select"  
+    required name="select_role" 
+    id="select_role"
+    formControlName="role" 
+  >
+    <option class="sign-up-form__select__option" value="">Options</option>
+    <option class="sign-up-form__select__option" value="guerrier">Guerrier</option>
+    <option class="sign-up-form__select__option" value="alchimiste">Alchimiste</option>
+    <option class="sign-up-form__select__option" value="sorcier">Sorcier</option>
+    <option class="sign-up-form__select__option" value="espions">Espions</option>
+    <option class="sign-up-form__select__option" value="enchanteur">Enchanteur</option>
+  </select>
+  <button class="sign-up-form__button">S'inscrire</button>
+</form>
+<p class="green-text text-align-center" *ngIf="statusInscription">
+  Vous vous êtes connecté avec succès, 
+  <a class="navbar__ul__li__a" routerLink="/" >allez à la page d'accueil.</a>
+</p>

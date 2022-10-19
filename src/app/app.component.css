@@ -1,0 +1,26 @@
+nav {
+    background-color: var(--smurf-blue);
+    width: 100%;
+    padding: 20px 40px;
+}
+.navbar__ul {
+    list-style: none;
+    display: flex;
+}
+.navbar__ul__li__a {
+    color: whitesmoke;
+    font-size: 1.4rem;
+    text-decoration: none;
+    margin-right: 40px;
+}
+.navbar__ul__li__p {
+    color: whitesmoke;
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+.navbar__ul__li__p:hover {
+    cursor: pointer;
+}
+.right-align {
+    margin-left: auto;
+}
