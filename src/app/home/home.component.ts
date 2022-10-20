@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SchtroumpfsService } from '../schtroumpfs.service';
 import { checkToken } from 'src/utils';
@@ -14,18 +14,21 @@ export class HomeComponent implements OnInit {
   constructor(private schtroumpfsService: SchtroumpfsService) { }
 
   tousSchtroumpfs = [];
-  errText:string = "";
+  errText: string = "";
   utilisateur: {nom:string, role: string, friends: [string]};
   editForm: FormGroup;
-  editMode:boolean = false;
+  editMode: boolean = false;
   statusEditForm: boolean = false;
   schtroumpfs: {}[] | any = []
   roles = ["guerrier", "alchimiste", "sorcier", "espions", "enchanteur"];
 
   ngOnInit(): void {
-
     this.fetchSchtroumpfs();
-    this.fetchUtilisateur();
+    if(sessionStorage.getItem("id_token")) {
+      this.fetchUtilisateur();
+    } else {
+      this.fetchUtilisateur = undefined
+    }
     
     this.editForm = new FormGroup({
       nom: new FormControl("", Validators.required),

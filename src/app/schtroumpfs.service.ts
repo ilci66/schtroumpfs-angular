@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Schtroumpfs, Utilisateur, AModifier } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +14,23 @@ export class SchtroumpfsService {
     Authorization: sessionStorage.getItem("id_token")
   });
 
-  fetchSchtroumpfs(): Observable<{}[]> | any {
-    return this.http.get<any>('http://localhost:5000/get-all')
+  fetchSchtroumpfs(): Observable<{schtroumpf: [Schtroumpfs]}> {
+    return this.http.get<{schtroumpf: [Schtroumpfs]}>('http://localhost:5000/get-all')
   }
 
-  fetchUtilisateur(): Observable<any>  {
-    return this.http.get<any>('http://localhost:5000/user', { headers: this.headerGeneric })
+  fetchUtilisateur(): Observable<Utilisateur>  {
+    return this.http.get<Utilisateur>('http://localhost:5000/user', { headers: this.headerGeneric })
   }
 
-  ajouterAmi(nom: string): Observable<any> {
-    return this.http.post<any>('http://localhost:5000/ajout-ami', { nomAmi: nom } , { headers: this.headerGeneric })
+  ajouterAmi(nom: string): Observable<Utilisateur> {
+    return this.http.post<Utilisateur>('http://localhost:5000/user/ajout-ami', { nomAmi: nom } , { headers: this.headerGeneric })
   }
 
-  enleverAmi(nom: string): Observable<any> {
-    return this.http.delete(`http://localhost:5000/enlever-ami/${nom}`, { headers: this.headerGeneric })
+  enleverAmi(nom: string): Observable<{ }> {
+    return this.http.delete<Utilisateur>(`http://localhost:5000/user/enlever-ami/${nom}`, { headers: this.headerGeneric })
   }
 
-  modifierUtilisateur(data): Observable<any> {
-    return this.http.post("http://localhost:5000/modifier", data, { headers: this.headerGeneric })
+  modifierUtilisateur(data: AModifier ): Observable<any> {
+    return this.http.post<Utilisateur>("http://localhost:5000/user/modifier", data, { headers: this.headerGeneric })
   }
 }

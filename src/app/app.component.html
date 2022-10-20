@@ -1,9 +1,35 @@
 <nav class="navbar">
   <ul class="navbar__ul">
-    <li class="navbar__ul__li"><a class="navbar__ul__li__a" routerLink="/" >Home</a></li>
-    <li class="navbar__ul__li right-align"><a class="navbar__ul__li__a" routerLink="/sign-in" >Se Connecter</a></li>
-    <li class="navbar__ul__li"><a class="navbar__ul__li__a" routerLink="/sign-up" >S'inscrire</a></li>
-    <li (click)="deconnecter()" class="navbar__ul__li"><p class="navbar__ul__li__p">Déconnecter</p></li>
+    <li class="navbar__ul__li">
+      <a 
+        class="navbar__ul__li__a" 
+        routerLink="/" 
+        routerLinkActive="active" 
+        ariaCurrentWhenActive="page"
+      >Home</a>
+    </li>
+    <li class="navbar__ul__li right-align">
+      <a 
+        class="navbar__ul__li__a" 
+        routerLink="/sign-in" 
+        routerLinkActive="active" 
+        ariaCurrentWhenActive="page"
+      >Se Connecter</a>
+    </li>
+    <li class="navbar__ul__li">
+      <a 
+        class="navbar__ul__li__a" 
+        routerLink="/sign-up" 
+        routerLinkActive="active" 
+        ariaCurrentWhenActive="page"
+      >S'inscrire</a>
+    </li>
+    <li (click)="deconnecter()" class="navbar__ul__li">
+      <a 
+        class="navbar__ul__li__a" 
+        routerLink="/deconnecter" 
+      >Deconnecter</a>
+    </li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

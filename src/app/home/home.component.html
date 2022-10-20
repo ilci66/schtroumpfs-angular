@@ -2,18 +2,24 @@
     <div class="home-err-box">
         <p class="red-text capitalize text-align-center">{{errText}}</p>
     </div>
+
+    <!-- profil avec le formulaire de modification -->
+
     <div class="profil__div">
         <div *ngIf="utilisateur" class="profil__div__utilisateur-box">
             <img src="https://cdn.imgbin.com/13/18/15/imgbin-smurfette-papa-smurf-baby-smurf-grouchy-smurf-de-smurfen-schtroumpf-sauvage-3Tk06daJFYjAGe4ke54nF2mCK.jpg" alt="smurf">
             <p>{{utilisateur.nom}}</p>
             <p>{{utilisateur.role}}</p>
-            <h3 class="profil__div__utilisateur-box__h3">Mes Amis</h3>
+            <h3 *ngIf="utilisateur.friends.length" class="profil__div__utilisateur-box__h3">Mes Amis</h3>
             <ul class="mes-amis-ul">
                 <li class="profil-ami" *ngFor="let ami of utilisateur.friends">{{ami}} <button class="btn-enlever" (click)="enleverAmi(ami)"  id="enlever-{{ami}}">Enlever Ami</button></li>
             </ul>
             <button class="profil__div__utilisateur-box__button" (click)="activateEdit()">Modifier</button>
 
-            <div *ngIf="editMode" class="modifier__div">
+
+            <!-- PARTIE DE MODIFICATION INITIALEMENT CACHÉE -->
+
+            <div *ngIf="editMode" class="edit-container">
                 <h2 class="edit-title">Modifier Vos Infos</h2>
                 <form [formGroup]="editForm" action="" class='edit-form' (ngSubmit)="onSubmit()">
                     <div class="edit-form__err-box">
@@ -21,9 +27,9 @@
                             {{errText}}
                           </p>
                     </div>
-                    <label class="edit-form__label" htmlFor="nom">Nouveau Nom</label>
+                    <label class="edit-form-label" htmlFor="nom">Nouveau Nom</label>
                     <input 
-                        class="edit-form__input" 
+                        class="edit-form-input" 
                         required 
                         type="text" 
                         id='nom' 
@@ -31,25 +37,25 @@
                         formControlName="nom"
                     />
 
-                    <label class="edit-form__label" htmlFor="password">Mot de Passe</label>
+                    <label class="edit-form-label" htmlFor="password">Mot de Passe</label>
                     <input 
-                    class="edit-form__input" 
+                    class="edit-form-input" 
                         required 
                         type="password" 
                         id='motDePasse'
                         name='motDePasse'
                         formControlName="motDePasse"
                     />
-                    <label class="edit-form__label" htmlFor="select_role">Nouveau Rôle</label>
+                    <label class="edit-form-label" htmlFor="select_role">Nouveau Rôle</label>
                     <select 
-                        class="edit-form__select"  
+                        class="edit-form-select"  
                         required name="select_role" 
                         id="select_role"
                         formControlName="role"  
                     >
                         <option class="capitalize" *ngFor="let role of roles" [value]="role">{{role}}</option>
                     </select>
-                    <button class="edit-form__button">Soumettre</button>
+                    <button class="edit-form-button">Soumettre</button>
                 </form>
             </div>
         </div>
@@ -58,14 +64,14 @@
         </div>
     </div>
 
-
+    <!-- LISTE DE TOUS LES SCHTROUMPFS DANS NOTRE BASE DE DONNÉES -->
     
-    <div class="schtroumpfs__list__div">
-        <div class="schtroumpfs__list__div__container" *ngFor="let schtroumpf of tousSchtroumpfs">
+    <div class="schtroumpfs-list-container">
+        <div class="schtroumpf-cards" *ngFor="let schtroumpf of tousSchtroumpfs">
             <img src="https://cdn.imgbin.com/13/18/15/imgbin-smurfette-papa-smurf-baby-smurf-grouchy-smurf-de-smurfen-schtroumpf-sauvage-3Tk06daJFYjAGe4ke54nF2mCK.jpg" alt="smurf">
             <p>{{schtroumpf.nom}}</p>
             <p>{{schtroumpf.role}}</p>
-            <button class="schtroumpfs__list__div__container__btn" (click)="ajoutAmi(schtroumpf.nom)" id="{{schtroumpf.nom}}">Ajout Ami</button>
+            <button class="schtroumpf-card-btn" (click)="ajoutAmi(schtroumpf.nom)" id="{{schtroumpf.nom}}">Ajout Ami</button>
         </div>
     </div>
 </div>

@@ -8,11 +8,12 @@
 .home-err-box {
     grid-column: 1 / -1;
 }
-.schtroumpfs__list__div {
+.schtroumpfs-list-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 40px;
 }
+
 .profil__div {
     padding: 0 10px;
     display: flex;
@@ -23,6 +24,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
+    box-shadow: 2px 2px 12px turquoise;
+    border-radius: 5px;
 }
 .profil__div__utilisateur-box__h3 {
     text-align: center;
@@ -34,7 +38,8 @@
     padding: var(--input-padding-x) var(--input-padding-y);
     margin-top: 20px;
     border: none;
-    border-radius: 15px;
+    border-radius: 3px;
+    width: 100%;
     font-size: 1.4rem;
     transition: 0.3s;
 }
@@ -42,6 +47,7 @@
 .profil__div__utilisateur-box__button:hover {
     color: var(--smurf-blue);
     background-color: whitesmoke;
+    box-shadow: 0px 0px 6px var(--smurf-blue);
     cursor: pointer;
 }
 .mes-amis-ul {
@@ -68,11 +74,12 @@
     opacity: 0.8;
     cursor: pointer;
 }
-.modifier__div {
+.edit-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 30px;
+    width: 100%;
 }
 .edit-title {
     text-align:center;
@@ -85,24 +92,24 @@
     margin: 0 auto;
 }
 
-.edit-form__label {
+.edit-form-label {
     font-size: 1.2rem;
     margin-top: 10px;
     margin-left: 10px;
 }
-.edit-form__input {
+.edit-form-input {
     padding: var(--input-padding-x) var(--input-padding-y);
     border-radius: 15px;
     border: none;
     background-color: rgb(241, 241, 241);
 }
-.edit-form__select {
+.edit-form-select {
     padding: var(--input-padding-x) var(--input-padding-y);
     border-radius: 15px;
     border: none;
     background-color: rgb(241, 241, 241);
 }
-.edit-form__button {
+.edit-form-button {
     background-color: var(--smurf-blue);
     color: whitesmoke;
     padding: var(--input-padding-x) var(--input-padding-y);
@@ -113,28 +120,56 @@
     transition: 0.3s;
 }
 
-.edit-form__button:hover {
+.edit-form-button:hover {
     color: var(--smurf-blue);
     background-color: whitesmoke;
     cursor: pointer;
+    box-shadow: 0px 0px 6px var(--smurf-blue);
 }
-.schtroumpfs__list__div__container {
+.schtroumpf-cards {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: .3s;
+    box-shadow: 4px 4px 6px lightgray;
+    padding: 5px;
+    border-radius: 5px;
 }
-.schtroumpfs__list__div__container__btn {
+.schtroumpf-cards:hover {
+    box-shadow: 0px 0px 6px var(--smurf-blue);
+}
+
+.schtroumpf-card-btn {
     background-color: var(--smurf-blue);
     color: whitesmoke;
     padding: var(--input-padding-x) var(--input-padding-y);
     margin-top: 20px;
     border: none;
-    border-radius: 15px;
+    width: 100%;
+    border-radius: 3px;
     transition: 0.3s;
 }
 
-.schtroumpfs__list__div__container__btn:hover {
+.schtroumpf-card-btn:hover {
     color: var(--smurf-blue);
     background-color: whitesmoke;
     cursor: pointer;
+    box-shadow: 0px 0px 6px var(--smurf-blue);
+}
+
+@media (max-width: 720px) {
+    .schtroumpfs-list-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+}
+@media (max-width: 480px) {
+    .schtroumpfs-list-container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+    }
+    .home-container {
+        grid-template-columns: 1fr;
+    }
+    
 }
