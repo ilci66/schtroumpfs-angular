@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SignService } from '../sign.service';
 import { saveUserSession } from 'src/utils';
-import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,6 +14,7 @@ export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   errText:string = "";
   statusInscription:boolean = false;
+  roles = ["guerrier", "alchimiste", "sorcier", "espions", "enchanteur"];
 
   constructor(private signService:SignService) { }
 

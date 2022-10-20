@@ -1,14 +1,10 @@
 <h1 class="sign-up-title">S'inscrire</h1>
 <form [formGroup]="signUpForm" action="" class='sign-up-form' (ngSubmit)="onSubmit()">
   <div class="sign-up-form__err-box">
-    <p class="red-text text-align-center" *ngIf="!statusInscription">
+    <p class="red-text text-align-center capitalize" *ngIf="!statusInscription">
       {{errText}}
     </p>
   </div>
-  <p class="green-text text-align-center" *ngIf="statusInscription">
-    Vous vous êtes connecté avec succès, 
-    <a class="navbar__ul__li__a" routerLink="/" >allez à la page d'accueil.</a>
-  </p>
   <label class="sign-up-form__label" htmlFor="nom">Nom</label>
   <input 
     class="sign-up-form__input" 
@@ -46,13 +42,11 @@
     id="select_role"
     formControlName="role" 
   >
-    <option class="sign-up-form__select__option" value="">Options</option>
-    <option class="sign-up-form__select__option" value="guerrier">Guerrier</option>
-    <option class="sign-up-form__select__option" value="alchimiste">Alchimiste</option>
-    <option class="sign-up-form__select__option" value="sorcier">Sorcier</option>
-    <option class="sign-up-form__select__option" value="espions">Espions</option>
-    <option class="sign-up-form__select__option" value="enchanteur">Enchanteur</option>
+    <option class="capitalize" *ngFor="let role of roles" [value]="role">{{role}}</option>
   </select>
   <button class="sign-up-form__button">S'inscrire</button>
 </form>
-
+<p class="green-text text-align-center capitalize" *ngIf="statusInscription">
+  Vous vous êtes connecté avec succès, 
+  <a class="navbar__ul__li__a" routerLink="/" >allez à la page d'accueil.</a>
+</p>

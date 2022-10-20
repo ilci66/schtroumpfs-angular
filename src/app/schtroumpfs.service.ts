@@ -29,4 +29,8 @@ export class SchtroumpfsService {
   enleverAmi(nom: string): Observable<any> {
     return this.http.delete(`http://localhost:5000/enlever-ami/${nom}`, { headers: this.headerGeneric })
   }
+
+  modifierUtilisateur(data): Observable<any> {
+    return this.http.post("http://localhost:5000/modifier", data, { headers: this.headerGeneric })
+  }
 }

@@ -1,5 +1,7 @@
 <div class="home-container">
-
+    <div class="home-err-box">
+        <p class="red-text capitalize text-align-center">{{errText}}</p>
+    </div>
     <div class="profil__div">
         <div *ngIf="utilisateur" class="profil__div__utilisateur-box">
             <img src="https://cdn.imgbin.com/13/18/15/imgbin-smurfette-papa-smurf-baby-smurf-grouchy-smurf-de-smurfen-schtroumpf-sauvage-3Tk06daJFYjAGe4ke54nF2mCK.jpg" alt="smurf">
@@ -9,13 +11,17 @@
             <ul class="mes-amis-ul">
                 <li class="profil-ami" *ngFor="let ami of utilisateur.friends">{{ami}} <button class="btn-enlever" (click)="enleverAmi(ami)"  id="enlever-{{ami}}">Enlever Ami</button></li>
             </ul>
-            <button class="profil__div__utilisateur-box__button">Modifier</button>
+            <button class="profil__div__utilisateur-box__button" (click)="activateEdit()">Modifier</button>
 
-            <div class="modifier__div">
+            <div *ngIf="editMode" class="modifier__div">
                 <h2 class="edit-title">Modifier Vos Infos</h2>
                 <form [formGroup]="editForm" action="" class='edit-form' (ngSubmit)="onSubmit()">
-                    <div class="edit-form__err-box"></div>
-                    <label class="edit-form__label" htmlFor="nom">Nom</label>
+                    <div class="edit-form__err-box">
+                        <p class="red-text text-align-center" *ngIf="!statusEditForm">
+                            {{errText}}
+                          </p>
+                    </div>
+                    <label class="edit-form__label" htmlFor="nom">Nouveau Nom</label>
                     <input 
                         class="edit-form__input" 
                         required 
@@ -34,19 +40,14 @@
                         name='motDePasse'
                         formControlName="motDePasse"
                     />
-                    <label class="edit-form__label" htmlFor="select_role">Rôle</label>
+                    <label class="edit-form__label" htmlFor="select_role">Nouveau Rôle</label>
                     <select 
                         class="edit-form__select"  
                         required name="select_role" 
                         id="select_role"
-                        formControlName="role" 
+                        formControlName="role"  
                     >
-                        <option class="edit-form__select__option" value="">Options</option>
-                        <option class="edit-form__select__option" value="guerrier">Guerrier</option>
-                        <option class="edit-form__select__option" value="alchimiste">Alchimiste</option>
-                        <option class="edit-form__select__option" value="sorcier">Sorcier</option>
-                        <option class="edit-form__select__option" value="espions">Espions</option>
-                        <option class="edit-form__select__option" value="enchanteur">Enchanteur</option>
+                        <option class="capitalize" *ngFor="let role of roles" [value]="role">{{role}}</option>
                     </select>
                     <button class="edit-form__button">Soumettre</button>
                 </form>

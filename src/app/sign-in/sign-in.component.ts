@@ -31,7 +31,7 @@ export class SignInComponent implements OnInit {
 
   onSubmit() {
     // console.log(this.signInForm)
-    const { nom, motDePasse} = this.signInForm.value;
+    const { nom, motDePasse } = this.signInForm.value;
     if(nom === "" || motDePasse === "") {
       this.setErrorText("merci de remplir tous les champs");
       return
@@ -42,18 +42,13 @@ export class SignInComponent implements OnInit {
         .subscribe((res:{token:string, expiresIn:string}) => {
           const { expiresIn, token } = res;
           saveUserSession(expiresIn, token);
-          
-          // window.location.href = '/'
           this.statusConnection =  true;
           this.setErrorText("");
         }, (err: HttpErrorResponse) => {
           console.log(err.error.error)
           this.statusConnection = false;
           this.setErrorText(err.error.error);
-
         })
-      
-      console.log("GOTTA HANDLE REDIRECTION")
     }
   }
 }

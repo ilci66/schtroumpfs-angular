@@ -1,7 +1,7 @@
 <h1 class="sign-in-title">Se Connnecter</h1>
 <form [formGroup]="signInForm" action="" class='sign-in-form' (ngSubmit)="onSubmit()">
   <div class="sign-in-form__err-box">
-    <p class="red-text text-align-center" *ngIf="!statusConnection">
+    <p class="red-text text-align-center capitalize" *ngIf="!statusConnection">
       {{errText}}
     </p>
   </div>
@@ -28,7 +28,7 @@
   <button  class="sign-in-form__button">Se Connnecter</button>
 </form>
 
-<p class="green-text text-align-center" *ngIf="statusConnection">
+<p class="green-text text-align-center capitalize" *ngIf="statusConnection">
   Vous avez connecté avec succès, 
   <a class="navbar__ul__li__a" routerLink="/" >allez à la page d'accueil.</a>
 </p>

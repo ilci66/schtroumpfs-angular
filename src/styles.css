@@ -24,7 +24,6 @@ img {
 .red-text {
     color: red;
     margin-top: 20px;
-    text-transform: capitalize;
 }
 .green-text {
     margin-top: 20px;
@@ -36,4 +35,7 @@ img {
 }
 .green-text > a:hover {
     color: orange;
+}
+.capitalize {
+    text-transform: capitalize;
 }

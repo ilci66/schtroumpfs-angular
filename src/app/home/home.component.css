@@ -5,6 +5,9 @@
     grid-gap: 20px;
     text-transform: capitalize;
 }
+.home-err-box {
+    grid-column: 1 / -1;
+}
 .schtroumpfs__list__div {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
