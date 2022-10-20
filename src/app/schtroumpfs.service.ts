@@ -15,22 +15,23 @@ export class SchtroumpfsService {
   });
 
   fetchSchtroumpfs(): Observable<{schtroumpf: [Schtroumpfs]}> {
-    return this.http.get<{schtroumpf: [Schtroumpfs]}>('http://localhost:5000/get-all')
+    return this.http.get<{schtroumpf: [Schtroumpfs]}>('http://localhost:5000/all')
   }
-
+  
   fetchUtilisateur(): Observable<Utilisateur>  {
     return this.http.get<Utilisateur>('http://localhost:5000/user', { headers: this.headerGeneric })
   }
-
-  ajouterAmi(nom: string): Observable<Utilisateur> {
-    return this.http.post<Utilisateur>('http://localhost:5000/user/ajout-ami', { nomAmi: nom } , { headers: this.headerGeneric })
-  }
-
-  enleverAmi(nom: string): Observable<{ }> {
-    return this.http.delete<Utilisateur>(`http://localhost:5000/user/enlever-ami/${nom}`, { headers: this.headerGeneric })
-  }
-
+  
   modifierUtilisateur(data: AModifier ): Observable<any> {
     return this.http.post<Utilisateur>("http://localhost:5000/user/modifier", data, { headers: this.headerGeneric })
   }
+
+  ajouterAmi(nom: string): Observable<Utilisateur> {
+    return this.http.post<Utilisateur>('http://localhost:5000/ami/', { nomAmi: nom } , { headers: this.headerGeneric })
+  }
+
+  enleverAmi(nom: string): Observable<{ }> {
+    return this.http.delete<Utilisateur>(`http://localhost:5000/ami/${nom}`, { headers: this.headerGeneric })
+  }
+
 }
