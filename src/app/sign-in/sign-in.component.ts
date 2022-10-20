@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { saveUserSession } from 'src/utils';
 import { SignService } from '../sign.service';
 
 
@@ -11,11 +13,10 @@ import { SignService } from '../sign.service';
 export class SignInComponent implements OnInit {
 
   signInForm: FormGroup;
-  errText:String = "";
+  errText:string = "";
   statusConnection:boolean = false;
 
   constructor(private signService:SignService ) { }
-
 
   ngOnInit(): void {
     this.signInForm = new FormGroup({
@@ -24,44 +25,35 @@ export class SignInComponent implements OnInit {
     });
   }
 
+  private setErrorText(text:string) {
+    this.errText = text;
+  } ;
+
   onSubmit() {
-    console.log(this.signInForm)
+    // console.log(this.signInForm)
+    const { nom, motDePasse} = this.signInForm.value;
+    if(nom === "" || motDePasse === "") {
+      this.setErrorText("merci de remplir tous les champs");
+      return
+    }
     if(this.signInForm.valid) {
-      const { nom, motDePasse} = this.signInForm.value;
 
       this.signService.submitSignIn(nom, motDePasse)
         .subscribe((res:{token:string, expiresIn:string}) => {
           const { expiresIn, token } = res;
-          sessionStorage.removeItem("id_token");
-          sessionStorage.removeItem("expires_at");
-          const expiresAt = Date.now() + Number.parseInt(expiresIn) * 86400 * 1000; // day
-
-          sessionStorage.setItem('id_token', token);
-          sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+          saveUserSession(expiresIn, token);
           
           // window.location.href = '/'
           this.statusConnection =  true;
+          this.setErrorText("");
+        }, (err: HttpErrorResponse) => {
+          console.log(err.error.error)
+          this.statusConnection = false;
+          this.setErrorText(err.error.error);
+
         })
       
       console.log("GOTTA HANDLE REDIRECTION")
-      
-
-      // console.log(nom, motDePasse)
-
-      // const postData = { nom, password:motDePasse }
-
-      // this.http.post('http://localhost:5000/sign-in', postData)
-      //   .subscribe((res:{token:string, expiresIn:string}) => {
-      //     const { expiresIn, token } = res;
-      //     sessionStorage.removeItem("id_token");
-      //     sessionStorage.removeItem("expires_at");
-      //     const expiresAt = Date.now() + Number.parseInt(expiresIn) * 86400 * 1000; // day
-
-      //     sessionStorage.setItem('id_token', token);
-      //     sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-          
-      //     window.location.href = '/'
-      //   })
     }
   }
 }

@@ -1,6 +1,10 @@
 <h1 class="sign-in-title">Se Connnecter</h1>
 <form [formGroup]="signInForm" action="" class='sign-in-form' (ngSubmit)="onSubmit()">
-  <div class="sign-in-form__err-box"></div>
+  <div class="sign-in-form__err-box">
+    <p class="red-text text-align-center" *ngIf="!statusConnection">
+      {{errText}}
+    </p>
+  </div>
   <label class="sign-in-form__label" htmlFor='nom'>Nom</label>
   <input 
     class="sign-in-form__input" 
@@ -23,7 +27,8 @@
   
   <button  class="sign-in-form__button">Se Connnecter</button>
 </form>
+
 <p class="green-text text-align-center" *ngIf="statusConnection">
-  Vous avez créé votre compte avec succès, 
+  Vous avez connecté avec succès, 
   <a class="navbar__ul__li__a" routerLink="/" >allez à la page d'accueil.</a>
 </p>
